@@ -1,0 +1,74 @@
+body{
+	margin: 0;
+	margin-left: 4vw;
+	background-color: rgb(240,240,240);
+	display: inline-block;
+}
+
+.clearboth{
+	clear: both;
+}
+
+/* --- Menu --- */
+#container-menu{
+	position: fixed;
+	top: 0;
+	left: -37vw;
+	background-color: lightgray;
+	width: 40vw;
+	height: 100vh;
+	border-right: 2px solid orange;
+	transition: 0.8s;
+}
+
+#container-menu[active="on"]{
+	top: 0;
+	left: 0;
+	transition: 0.8s;
+}
+
+#container-menu[active="off"] .div-btn-return button{
+	float: right;
+}
+
+.div-btn-return button{
+	background-color: transparent;
+	border: none;
+	font-size: 1.7em;
+}
+
+.div-btn-return button:hover{
+	margin-left: -10px;
+	margin-right: 10px;
+	transition: 0.7s;
+}
+
+#container-menu hr{
+	color: orange;
+}
+
+.div-btn-menu button{
+	display: block;
+	width: 90%;
+	padding: 10px 7px;
+	margin-bottom: 10px;
+	background-color: lightgray;
+	border: 1px solid transparent;
+}
+
+.div-btn-menu button:hover{
+	background-color: orange;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+/* --- Page --- */
+
+.title-page{
+	margin: 0 auto;
+	color: orange;
+	border: 2px solid orange;
+	padding: 5px;
+	margin-top: 5px;
+	border-radius: 5px;
+}
