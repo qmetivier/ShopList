@@ -47,6 +47,19 @@ class functions
 		return $array;
 	}
 
+	public static function decodeUtf8($array){
+		if (gettype($array) == 'array') {
+			foreach ($array as $key => $value) {
+				if (gettype($value) == 'array') {
+					$array[$key] = functions::decodeUtf8($value);
+				}else if(gettype($value) == 'string'){
+					$array[$key] = utf8_decode($value);
+				}
+			}
+		}
+		return $array;
+	}
+
 }
 
 ?>

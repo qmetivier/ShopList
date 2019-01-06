@@ -72,3 +72,28 @@ body{
 	margin-top: 5px;
 	border-radius: 5px;
 }
+
+.element-div{
+	color: orange;
+	border: 2px solid orange;
+	padding: 3px;
+	border-radius: 5px;
+	margin: 3px;
+}
+
+.element-delete{
+	float: right;
+	color: white;
+	background-color: orange;
+	border: none;
+	border-radius: 2px;
+	margin-top: 1px;
+	padding-bottom: 1px;
+}
+
+form input, form select{
+	border: 2px solid orange;
+	color: orange;
+	border-radius: 5px;
+	background-color: white;
+}

@@ -9,7 +9,7 @@ class requeteSQL
 //Connexion a la bdd
 public static function connexionBdd(){
 		$serverName = "localhost";
-		$connectionInfo = array( "Database" => "MegaCourses", "UID" => "sa", "PWD" => "SQL2014");
+		$connectionInfo = array( "Database" => "MegaCourses", "UID" => "sa", "PWD" => "SQL2014", "CharacterSet" => "UTF-8");
 
 		/* Connect using Windows Authentication. */  
 		$conn = sqlsrv_connect( $serverName, $connectionInfo);  
@@ -52,10 +52,44 @@ public static function Deconnexion(){
 
 }
 
+public static function getAllCatIngredients(){
+	$bdd =  requeteSQL::connexionBdd();
+	$sql = "select * from categorie_ingredient";
+	$stmt = sqlsrv_query( $bdd, $sql);
+	$response = [];
+	while (($temp = sqlsrv_fetch_array($stmt)) != null){
+		array_push($response, $temp);
+	}
+	requeteSQL::closeBdd($bdd);
+	return $response;
+}
+
+public static function getIdCatIngredient($name){
+	$bdd =  requeteSQL::connexionBdd();
+	$sql = "select identifiant from categorie_ingredient where label = '$name'";
+	$stmt = sqlsrv_query( $bdd, $sql);
+	$response = null;
+	if (($temp = sqlsrv_fetch_array($stmt)) != null) {
+		$response = $temp["identifiant"];
+	}
+	requeteSQL::closeBdd($bdd);
+	return $response;
+}
+
+public static function addCatIngredient($name){
+	$bdd =  requeteSQL::connexionBdd();
+	$sql = "insert into categorie_ingredient(label) values('$name')";
+	$stmt = sqlsrv_query( $bdd, $sql);
+	$stmt = sqlsrv_fetch_array($stmt);
+	$success = false;
+	if ($stmt != null) $success = true;
+	return $success;
+}
+
 // Retourne tout les ingredients
 public static function getAllIngredients(){
 	$bdd =  requeteSQL::connexionBdd();
-	$sql = "select ingredient.label as label, categorie_ingredient.label as cat_label from ingredient inner join categorie_ingredient on ingredient.id_categorie_ingredient = categorie_ingredient.identifiant";
+	$sql = "select ingredient.identifiant, ingredient.label as label, categorie_ingredient.label as cat_label from ingredient inner join categorie_ingredient on ingredient.id_categorie_ingredient = categorie_ingredient.identifiant";
 	$stmt = sqlsrv_query( $bdd, $sql);
 	$response = [];
 
@@ -66,6 +100,28 @@ public static function getAllIngredients(){
 	return $response;
 }
 
+public static function addIngredient($name, $name_cat){
+	$bdd =  requeteSQL::connexionBdd();
+	$idCat = requeteSQL::getIdCatIngredient($name_cat);
+	$sql = "insert into ingredient(label, id_categorie_ingredient, hebdomadaire) values('$name', '$idCat', 0)";
+	echo($sql);
+	$stmt = sqlsrv_query( $bdd, $sql);
+	$stmt = sqlsrv_fetch_array($stmt);
+	$success = false;
+	if ($stmt != null) $success = true;
+	return $success;
+}
+
+public static function delIngredient($id){
+	$bdd =  requeteSQL::connexionBdd();
+	$idCat = requeteSQL::getIdCatIngredient($name_cat);
+	$sql = "delete ingredient where identifiant = $id";
+	$stmt = sqlsrv_query( $bdd, $sql);
+	$stmt = sqlsrv_fetch_array($stmt);
+	$success = false;
+	if ($stmt != null) $success = true;
+	return $success;
+}
 
 // Retourne tout les ingredients
 public static function getAllRecettes(){

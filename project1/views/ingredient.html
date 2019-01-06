@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
 	<title>Gestion des ingredients</title>
 	<link rel="stylesheet" type="text/css" href="../styles/general.css">
 </head>
@@ -10,9 +9,15 @@
 </header>
 <body>
 	<h2 class="title-page">Gestion des ingrédients</h2>
-	<div class="container-search-bar">
-		
-	</div>
+	<br>
+	<form id="container-add-bar" method="post" action="ingredient.php">
+		<input type="text" name="name" placeholder="Nom de l'ingredient" required>
+		<input type="text" list="select-cat-ing" name="cat_ingredient" autocomplete="off" required />
+		<datalist id="select-cat-ing">
+		</datalist>
+		<input type="submit" value="Ajouter">
+	</form>
+	<br>
 	<div id="container-ingredients">
 		
 	</div>
